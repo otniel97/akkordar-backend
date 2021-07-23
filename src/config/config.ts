@@ -1,16 +1,16 @@
-import dotenv = require('dotenv');
+import * as dotenv from 'dotenv'
 dotenv.config();
 
-export function getEnviromentConfig(MODE:string){
+export function getEnviromentConfig(MODE: string) {
 
-    if(!MODE)
+    if (!MODE)
         throw new Error(`MODE is missing`)
 
     let config = {};
 
-    switch(MODE){
+    switch (MODE) {
 
-        case 'DEVELOPMENT':     
+        case 'DEVELOPMENT':
             config = Object.assign({
                 "PORT": "3000",
                 "MYSQL_HOST": process.env.DATABASE_DEV_HOST,
@@ -19,9 +19,9 @@ export function getEnviromentConfig(MODE:string){
                 "MYSQL_PASSWORD": process.env.DATABASE_PASSWORD,
                 "MYSQL_DATABASE": process.env.DATABASE_DEV_NAME,
             })
-            break; 
+            break;
 
-        case 'TEST': 
+        case 'TEST':
             config = Object.assign({
                 "PORT": "8080",
                 "MYSQL_HOST": "",
@@ -32,7 +32,7 @@ export function getEnviromentConfig(MODE:string){
             })
             break;
 
-            case 'PRODUCTION': 
+        case 'PRODUCTION':
             config = Object.assign({
                 "PORT": "8080",
                 "MYSQL_HOST": "",
@@ -42,8 +42,8 @@ export function getEnviromentConfig(MODE:string){
                 "MYSQL_DATABASE": "",
             })
             break;
-        
-        default: 
+
+        default:
             config = Object.assign({
                 "PORT": "8080",
                 "MYSQL_HOST": "localhost",

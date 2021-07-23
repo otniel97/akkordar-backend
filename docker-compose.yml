@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  akkordardb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'akkordardb'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - akkordar-db:/var/lib/mysql
+    networks:
+      backend:
+  
+  akkordar_backend: 
+    build: 
+      context: .
+      dockerfile: ./
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_USERNAME: 'user'
+      DATABASE_PASSWORD: 'password'
+      DATABASE_DEV_NAME: 'akkordardb'
+      DATABASE_DEV_HOST: 'akkordardb'
+      DATABASE_DEV_PORT: 3306
+    depends_on: 
+      - akkordardb
+    networks:
+      backend:
+
+networks:
+  backend:
+    ipam:
+      driver: default
+
+volumes:
+  akkordar-db:
