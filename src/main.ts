@@ -8,8 +8,9 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger();
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.setGlobalPrefix(`/api/${process.env.VERSION}`);
   initSwagger(app);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   await app.listen(process.env.PORT);
   logger.log(`Server is running in port ${process.env.PORT}`)
 }

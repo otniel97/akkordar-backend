@@ -1,5 +1,5 @@
 import { IsBoolean, IsEnum, IsString, Length } from 'class-validator';
-import { EnumToString } from 'src/helpers/enumToString';
+import { EnumToString } from '../../../helpers/enumToString';
 import { CategoryType } from '../enums'
 
 export class CreateCategoryDto {
