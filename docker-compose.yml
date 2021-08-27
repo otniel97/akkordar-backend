@@ -30,6 +30,8 @@ services:
       DATABASE_DEV_NAME: 'akkordardb'
       DATABASE_DEV_HOST: 'akkordardb'
       DATABASE_DEV_PORT: 3306
+      MODE: DEVELOPMENT
+      PORT: 3000
     depends_on: 
       - akkordardb
     networks:
